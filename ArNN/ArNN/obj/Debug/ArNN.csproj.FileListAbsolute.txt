@@ -1,0 +1,9 @@
+D:\ксенькино\ANN\ArNN\ArNN\bin\Debug\ArNN.exe.config
+D:\ксенькино\ANN\ArNN\ArNN\bin\Debug\ArNN.exe
+D:\ксенькино\ANN\ArNN\ArNN\bin\Debug\ArNN.pdb
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.csprojAssemblyReference.cache
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.Form1.resources
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.Properties.Resources.resources
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.csproj.GenerateResource.cache
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.exe
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.pdb
