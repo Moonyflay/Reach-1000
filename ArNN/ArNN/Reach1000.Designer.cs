@@ -32,20 +32,18 @@
             this.StopButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.RandomnessTrackBar = new System.Windows.Forms.TrackBar();
-            this.StartLabel = new System.Windows.Forms.Label();
-            this.StopLable = new System.Windows.Forms.Label();
-            this.ClearLabel = new System.Windows.Forms.Label();
             this.RandomnessLabel = new System.Windows.Forms.Label();
             this.ProcessTextBox = new System.Windows.Forms.TextBox();
             this.TimeLable = new System.Windows.Forms.Label();
             this.ActionNumberLable = new System.Windows.Forms.Label();
             this.NetworkVersionLable = new System.Windows.Forms.Label();
-            this.BestLable = new System.Windows.Forms.Label();
+            this.BestResultLable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.RandomnessTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // StartButton
             // 
+            this.StartButton.Enabled = false;
             this.StartButton.Location = new System.Drawing.Point(692, 380);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 32);
@@ -64,11 +62,11 @@
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(459, 380);
+            this.ClearButton.Location = new System.Drawing.Point(322, 418);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(75, 32);
+            this.ClearButton.Size = new System.Drawing.Size(106, 46);
             this.ClearButton.TabIndex = 2;
-            this.ClearButton.Text = "Clear";
+            this.ClearButton.Text = "Clear TextBox";
             this.ClearButton.UseVisualStyleBackColor = true;
             // 
             // RandomnessTrackBar
@@ -81,33 +79,6 @@
             this.RandomnessTrackBar.TabIndex = 3;
             this.RandomnessTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.RandomnessTrackBar.Value = 3;
-            // 
-            // StartLabel
-            // 
-            this.StartLabel.AutoSize = true;
-            this.StartLabel.Location = new System.Drawing.Point(689, 344);
-            this.StartLabel.Name = "StartLabel";
-            this.StartLabel.Size = new System.Drawing.Size(46, 17);
-            this.StartLabel.TabIndex = 4;
-            this.StartLabel.Text = "label1";
-            // 
-            // StopLable
-            // 
-            this.StopLable.AutoSize = true;
-            this.StopLable.Location = new System.Drawing.Point(568, 344);
-            this.StopLable.Name = "StopLable";
-            this.StopLable.Size = new System.Drawing.Size(46, 17);
-            this.StopLable.TabIndex = 5;
-            this.StopLable.Text = "label2";
-            // 
-            // ClearLabel
-            // 
-            this.ClearLabel.AutoSize = true;
-            this.ClearLabel.Location = new System.Drawing.Point(456, 344);
-            this.ClearLabel.Name = "ClearLabel";
-            this.ClearLabel.Size = new System.Drawing.Size(75, 17);
-            this.ClearLabel.TabIndex = 6;
-            this.ClearLabel.Text = "Очистить ";
             // 
             // RandomnessLabel
             // 
@@ -155,34 +126,31 @@
             this.NetworkVersionLable.TabIndex = 11;
             this.NetworkVersionLable.Text = "Номер нейросети: 0";
             // 
-            // BestLable
+            // BestResultLable
             // 
-            this.BestLable.AutoSize = true;
-            this.BestLable.Location = new System.Drawing.Point(539, 148);
-            this.BestLable.Name = "BestLable";
-            this.BestLable.Size = new System.Drawing.Size(135, 17);
-            this.BestLable.TabIndex = 12;
-            this.BestLable.Text = "Лучший результат:";
+            this.BestResultLable.AutoSize = true;
+            this.BestResultLable.Location = new System.Drawing.Point(539, 148);
+            this.BestResultLable.Name = "BestResultLable";
+            this.BestResultLable.Size = new System.Drawing.Size(135, 17);
+            this.BestResultLable.TabIndex = 12;
+            this.BestResultLable.Text = "Лучший результат:";
             // 
-            // Form1
+            // Reach1000
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 468);
-            this.Controls.Add(this.BestLable);
+            this.Controls.Add(this.BestResultLable);
             this.Controls.Add(this.NetworkVersionLable);
             this.Controls.Add(this.ActionNumberLable);
             this.Controls.Add(this.TimeLable);
             this.Controls.Add(this.ProcessTextBox);
             this.Controls.Add(this.RandomnessLabel);
-            this.Controls.Add(this.ClearLabel);
-            this.Controls.Add(this.StopLable);
-            this.Controls.Add(this.StartLabel);
             this.Controls.Add(this.RandomnessTrackBar);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
-            this.Name = "Form1";
+            this.Name = "Reach1000";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.RandomnessTrackBar)).EndInit();
             this.ResumeLayout(false);
@@ -196,15 +164,12 @@
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.TrackBar RandomnessTrackBar;
-        private System.Windows.Forms.Label StartLabel;
-        private System.Windows.Forms.Label StopLable;
-        private System.Windows.Forms.Label ClearLabel;
         private System.Windows.Forms.Label RandomnessLabel;
         private System.Windows.Forms.TextBox ProcessTextBox;
         private System.Windows.Forms.Label TimeLable;
         private System.Windows.Forms.Label ActionNumberLable;
         private System.Windows.Forms.Label NetworkVersionLable;
-        private System.Windows.Forms.Label BestLable;
+        private System.Windows.Forms.Label BestResultLable;
     }
 }
 
