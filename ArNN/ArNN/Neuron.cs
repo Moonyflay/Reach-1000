@@ -7,28 +7,26 @@ using System.Windows.Forms;
 namespace ArNN
 {
     public delegate void Neuron_Action(ref int x, int a = 0);
-    class Neuron
+    public class Neuron
     {
         Neuron_Action action;
-        Neuron Next; // Нейрон, которому передадут сигнал
-        public Neuron(Neuron_Action _action, Neuron next)
+        public Neuron Next; // Нейрон, которому передадут сигнал
+        public Neuron(Neuron_Action _action)
         {
-            
             Change_action("Add", _action);// Внесение первых действий в список выполняемых  действий
-            if(next != null) Next = next; 
-                
-            action(ref Neuroweb.reached_number, Neuroweb.random_param);
-            
         }
-        public void Act() // Выполнение нейроном заданных действий
+        public void Act(Neuroweb sender) // Выполнение нейроном заданных действий
         { 
-            action(ref Neuroweb.reached_number, Neuroweb.random_param);
-            if (Neuroweb.reached_number < Reach1000.goal) Pass();
-            else { Neuroweb.Evolve(); }
+            action(ref sender.reached_number, sender.random_param);
+            if (sender.reached_number < Reach1000.goal) Pass(sender);
+            else {
+                if (sender.Delta >= 0) sender.Evolve();
+                else { sender = (Neuroweb)sender.previous.Clone(); sender.Evolve(); }
+            }
         }
-        private void Pass() // Передача сигнала
+        private void Pass(Neuroweb sender) // Передача сигнала
         {
-                Next.Act();          
+           /* Neuroweb.Mother.Pause = true;*/ Next.Act(sender);          
         }
         public void Change_action(string op_name, Neuron_Action _action) 
         {
@@ -43,6 +41,7 @@ namespace ArNN
                     { throw new Exception("В Change_action опечатка: " + op_name); }
             }
         }
+        
 
     }
 }

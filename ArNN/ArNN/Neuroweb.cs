@@ -6,22 +6,28 @@ using System.Threading.Tasks;
 
 namespace ArNN
 {
-    class Neuroweb
+    public class Neuroweb : ICloneable
     {
-        static Reach1000 Mother;
-        private int Сhance
+        public static Reach1000 Mother;
+        private static int Сhance
         { get { return Reach1000.chance; } }
-        public static int reached_number = 0;
-        public static int random_param;
-        private static int initial_amount = Reach1000.sluchai.Next(1,6);  // Исходное количество действий для нейрона
-        private static int multiply_amount = Reach1000.sluchai.Next(0, 6);// Исходное количество действий умножения в нейроне
-        public static Neuron[] web = new Neuron[5];                       // Разница initial_amount и multiply_amount дает исходное количество действий сложения в нейроне
-        Neuron_Action[] action = new Neuron_Action[5];
-        
-        public Neuroweb(Reach1000 mother)
+        public int reached_number = 0;
+        public int random_param;
+        private int initial_amount = Reach1000.sluchai.Next(1, 6);  // Исходное количество действий для нейрона
+        private int multiply_amount = Reach1000.sluchai.Next(0, 6);// Исходное количество действий умножения в нейроне
+        public Neuron[] web = new Neuron[5];                       // Разница initial_amount и multiply_amount дает исходное количество действий сложения в нейроне
+        Neuron_Action[] initial_action = new Neuron_Action[5];
+        public Neuroweb previous;
+        private int total_action_numer_of_this_nw = 0;
+        public int Delta 
+        {
+            get{ return this.total_action_numer_of_this_nw - previous.total_action_numer_of_this_nw; }
+           
+        }
+        public Neuroweb(Reach1000 mother, bool dospawn = true)
         {
             Mother = mother;
-            if (Reach1000.network_version == 0) Spawn();
+            if (Reach1000.network_version == 0 && dospawn == true) Spawn();
            
         }
 
@@ -32,20 +38,51 @@ namespace ArNN
             Mother.Show_network_version();
             for (int i = 0; i < 5; i++)
             { 
-                do { next_neuron_index = Reach1000.sluchai.Next(0, 5); } while (next_neuron_index == i);
-                Initial_action_creation(action[i]);
-                web[i] = new Neuron(action[i], web[next_neuron_index]);
+                Initial_action_creation(ref initial_action[i]);
+                web[i] = new Neuron(initial_action[i]);
             }
-            web[0].Act();
+            for (int i = 0; i < 5; i++)
+            { 
+                do { next_neuron_index = Reach1000.sluchai.Next(0, 5); } while (next_neuron_index == i);
+                web[i].Next = web[next_neuron_index];
+            }
+            previous = (Neuroweb)this.Clone();
+                web[0].Act(this);
         }
-        public static void Evolve() 
+        public void Evolve() 
         {
                 Reach1000.network_version++;
+                Reach1000.action_number = 1;
                 Mother.Show_network_version();
-            
-
+            for (int i = 0; i < web.Length; i++)
+            {
+                if (Reach1000.sluchai.Next(0, 101) <= Reach1000.chance)
+                {
+                    string op_name;
+                    Neuron_Action act;
+                    if (Reach1000.sluchai.Next(0, 101) < 50) op_name = "Add"; else op_name = "Delete";
+                    if (Reach1000.sluchai.Next(0, 101) < 50) act = Add; else act = Multiply;
+                    web[i].Change_action(op_name, act);
+                }
+                if (Reach1000.sluchai.Next(0, 101) <= Reach1000.chance)
+                {
+                    int j;
+                    do 
+                    { 
+                        j = Reach1000.sluchai.Next(0, web.Length); 
+                        web[i].Next = web[j]; 
+                    }
+                    while (i == j);
+                }
+                if (Reach1000.sluchai.Next(0, 101) <= Reach1000.chance)
+                {
+                    random_param += Reach1000.sluchai.Next(-5, 5);
+                }
+            }
+            Mother.Pause = true;
+            web[0].Act(this);
         }
-        void Initial_action_creation(Neuron_Action action)
+        void Initial_action_creation(ref Neuron_Action action)
         {
             int i = 0;
             int j = 0;
@@ -70,17 +107,40 @@ namespace ArNN
                 }
             } 
         }
+        public object Clone() 
+        {
+            Neuroweb old = new Neuroweb(Mother, false)
+            {
+                reached_number = this.reached_number,
+                random_param = this.random_param,
+                initial_amount = this.initial_amount, 
+                multiply_amount = this.multiply_amount
+            };
+            for (int i = 0; i < web.Length; i++)
+            { old.web[i] = this.web[i]; }
+            for (int i = 0; i < initial_action.Length; i++)
+            { old.initial_action[i] = this.initial_action[i]; }
+            return old;
+        }
         public void Add(ref int x, int a = 0)
-        { 
+        {
+            int previous = x;
             if (a == 0) x += x; else x += a;
             Reach1000.action_number++;
+            Reach1000.total_action_number++;
+            total_action_numer_of_this_nw++;
             Mother.Show_action_number();
+            Mother.Process_text(this, "Add", previous);
         }
         public void Multiply(ref int x, int a = 0)                                                                                                                              
-        { 
+        {
+            int previous = x;
             if (a == 0) x *= x; else x *= a;
             Reach1000.action_number++;
+            Reach1000.total_action_number++;
+            total_action_numer_of_this_nw++;
             Mother.Show_action_number();
+            Mother.Process_text(this, "Multiply", previous);
         }
         
     }

@@ -7,3 +7,4 @@ D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.csproj.GenerateResource.cache
 D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.exe
 D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.pdb
 D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.Reach1000.resources
+D:\ксенькино\ANN\ArNN\ArNN\obj\Debug\ArNN.csproj.CoreCompileInputs.cache

@@ -38,12 +38,12 @@
             this.ActionNumberLable = new System.Windows.Forms.Label();
             this.NetworkVersionLable = new System.Windows.Forms.Label();
             this.BestResultLable = new System.Windows.Forms.Label();
+            this.PauseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.RandomnessTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // StartButton
             // 
-            this.StartButton.Enabled = false;
             this.StartButton.Location = new System.Drawing.Point(692, 380);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 32);
@@ -53,7 +53,7 @@
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(571, 380);
+            this.StopButton.Location = new System.Drawing.Point(596, 380);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(75, 32);
             this.StopButton.TabIndex = 1;
@@ -91,6 +91,8 @@
             // 
             // ProcessTextBox
             // 
+            this.ProcessTextBox.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
+            this.ProcessTextBox.AllowDrop = true;
             this.ProcessTextBox.Location = new System.Drawing.Point(12, 12);
             this.ProcessTextBox.Multiline = true;
             this.ProcessTextBox.Name = "ProcessTextBox";
@@ -135,11 +137,21 @@
             this.BestResultLable.TabIndex = 12;
             this.BestResultLable.Text = "Лучший результат:";
             // 
+            // PauseButton
+            // 
+            this.PauseButton.Location = new System.Drawing.Point(490, 380);
+            this.PauseButton.Name = "PauseButton";
+            this.PauseButton.Size = new System.Drawing.Size(75, 32);
+            this.PauseButton.TabIndex = 13;
+            this.PauseButton.Text = "Pause";
+            this.PauseButton.UseVisualStyleBackColor = true;
+            // 
             // Reach1000
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 468);
+            this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.BestResultLable);
             this.Controls.Add(this.NetworkVersionLable);
             this.Controls.Add(this.ActionNumberLable);
@@ -170,6 +182,7 @@
         private System.Windows.Forms.Label ActionNumberLable;
         private System.Windows.Forms.Label NetworkVersionLable;
         private System.Windows.Forms.Label BestResultLable;
+        private System.Windows.Forms.Button PauseButton;
     }
 }
 
