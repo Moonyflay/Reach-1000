@@ -12,13 +12,13 @@ namespace ArNN
         private static int Сhance
         { get { return Reach1000.chance; } }
         public int reached_number = 0;
-        public int random_param;
+        public int random_param = 0;
         private int initial_amount = Reach1000.sluchai.Next(1, 6);  // Исходное количество действий для нейрона
         private int multiply_amount = Reach1000.sluchai.Next(0, 6);// Исходное количество действий умножения в нейроне
         public Neuron[] web = new Neuron[5];                       // Разница initial_amount и multiply_amount дает исходное количество действий сложения в нейроне
         Neuron_Action[] initial_action = new Neuron_Action[5];
         public Neuroweb previous;
-        private int total_action_numer_of_this_nw = 0;
+        private int total_action_numer_of_this_nw = 0; // Суммарное количество действий данной нейросети
         public int Delta 
         {
             get{ return this.total_action_numer_of_this_nw - previous.total_action_numer_of_this_nw; }
@@ -47,13 +47,19 @@ namespace ArNN
                 web[i].Next = web[next_neuron_index];
             }
             previous = (Neuroweb)this.Clone();
-                web[0].Act(this);
+                
+        }
+        public void Start(ref Neuroweb sender)
+        { 
+            web[0].Act(ref sender);
         }
         public void Evolve() 
         {
                 Reach1000.network_version++;
-                Reach1000.action_number = 1;
-                Mother.Show_network_version();
+                Reach1000.action_number = 0;
+                previous = (Neuroweb)this.Clone();
+            reached_number = 0;
+            Mother.Show_network_version();
             for (int i = 0; i < web.Length; i++)
             {
                 if (Reach1000.sluchai.Next(0, 101) <= Reach1000.chance)
@@ -76,11 +82,11 @@ namespace ArNN
                 }
                 if (Reach1000.sluchai.Next(0, 101) <= Reach1000.chance)
                 {
-                    random_param += Reach1000.sluchai.Next(-5, 5);
+                    random_param += Reach1000.sluchai.Next(0, 5);
                 }
             }
-            Mother.Pause = true;
-            web[0].Act(this);
+            //Mother.Pause = true;
+            //web[0].Act(this);
         }
         void Initial_action_creation(ref Neuron_Action action)
         {
@@ -122,25 +128,23 @@ namespace ArNN
             { old.initial_action[i] = this.initial_action[i]; }
             return old;
         }
-        public void Add(ref int x, int a = 0)
+        public void Add(ref int x, int a)
         {
-            int previous = x;
             if (a == 0) x += x; else x += a;
             Reach1000.action_number++;
             Reach1000.total_action_number++;
             total_action_numer_of_this_nw++;
             Mother.Show_action_number();
-            Mother.Process_text(this, "Add", previous);
+            Mother.Process_text(x, a, "Add");
         }
-        public void Multiply(ref int x, int a = 0)                                                                                                                              
+        public void Multiply(ref int x, int a)                                                                                                                              
         {
-            int previous = x;
             if (a == 0) x *= x; else x *= a;
             Reach1000.action_number++;
             Reach1000.total_action_number++;
             total_action_numer_of_this_nw++;
             Mother.Show_action_number();
-            Mother.Process_text(this, "Multiply", previous);
+            Mother.Process_text(x, a, "Multiply");
         }
         
     }
